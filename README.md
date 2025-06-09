@@ -6,7 +6,7 @@ Welcome to **Binder**, typa vault of all my Python creations — from baby scrip
 
 ## 📦 What's Inside?
 
-This repo holds all sorts of Python goodies — mostly unorganized (because who has time for structure when you're too busy debugging 😤). Expect:
+This repo holds all sorts of Python goodies — mostly unorganized (because who has time for structure when you're too busy sleepin'). Expect:
 
 - 🎰 Slot Machine simulator (`Slots_Machine.py`)  
   A fully playable RNG-based gambling game with betting logic, symbols, and spicy spin animation.
