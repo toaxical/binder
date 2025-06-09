@@ -12,7 +12,10 @@ This repo holds all sorts of Python stuff — mostly unorganized (because who ha
   A fully playable RNG-based gambling game with betting logic, symbols, and spicy spin animation.
 
 - 🏦 Basic Banking Program (`Banking_Program.py`)
-  Quite basic program from when I was still learning, allows viewing balance, depoiting and withdrawing balance.
+  Quite a basic program; allows viewing balance, depoiting and withdrawing balance.
+
+- 🔐 Encryption-Decryption Program (`Encryption_Program.py`)
+  Enables you to encrypt text and decrypt it (in the same instance of execution) if needed.
 
 - 🔮 More programs slot..
   Every time I make something cool (or cursed), it ends up here — unless it’s too big, then it gets its own spotlight.
