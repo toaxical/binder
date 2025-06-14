@@ -8,7 +8,7 @@ def spinrow(symbols):
     luck2 = random.choice(symbols)
     luck3 = random.choice(symbols)
 
-    print("And the boxie spins.....")
+    print("-=-=-=-=-=-=-=-=-=-=-\nAnd the boxie spins.....")
     print("-=-=-=-=-=-=-=-=-=-=-")
     time.sleep(3)
     print(f"|{luck1}|❓|❓|")
@@ -75,20 +75,22 @@ def main():
     print("Symbols: 🎀 🍉 🍊")
     print("----------------------------------\n")
 
-# User wish for starting or quitting - this is not in a loop because we dont want it to be repeated throughout bet sessions.
+# User wish for starting or quitting - this is not in a loop because we dont want it to be repeated throughout bet sessions. (it is in a loop now lmao)
+    while carry_on:
+        wish = input("What would you like to do?: \n1. BETTING \n2. Quit \n> ")
 
-    wish = input("What would you like to do?: \n1. BETTING \n2. Quit \n> ")
-
-    if wish == "1":
-        ini_balance = int(input("----------------------------------\nWhat balance do you possess currently?: \n> $")) # the show begins, will ask user for their initial bal - in case of no winning throughout the game, theres no way to increase this *yet*
+        if wish == "1":
+            ini_balance = int(input("----------------------------------\nWhat balance do you possess currently?: \n> $")) # the show begins, will ask user for their initial bal - in case of no winning throughout the game, theres no way to increase this *yet*
     # these if and else statements provide validation
-        if ini_balance <= 10:
-            print("Sorry you do not sufficient amount to participate!")
-        else:
-            balance += ini_balance
-    if wish == "2":
-        print("Do come back again! 😘") # show quits too early :(
-        carry_on = False
+
+            if ini_balance <= 10:
+                print("----------------------------------\nSorry you do not have sufficient amount to participate!\n----------------------------------")
+            else:
+                balance += ini_balance
+                break
+        if wish == "2":
+            print("Do come back again! 😘") # show quits too early :(
+
 
 # Main body for gamble paradise 😭
     while carry_on:
