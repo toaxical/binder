@@ -10,11 +10,11 @@ def spinrow(symbols):
 
     print("-=-=-=-=-=-=-=-=-=-=-\nAnd the boxie spins.....")
     print("-=-=-=-=-=-=-=-=-=-=-")
-    time.sleep(0)
+    time.sleep(3)
     print(f"|{luck1}|❓|❓|")
-    time.sleep(0)
+    time.sleep(2)
     print(f"|{luck1}|{luck2}|❓|")
-    time.sleep(0)
+    time.sleep(1)
     print(f"|{luck1}|{luck2}|{luck3}|")
     print("-=-=-=-=-=-=-=-=-=-=-")
 
@@ -42,6 +42,8 @@ def resultdecider(watashi, nbet):
         nbetlocal = 0
         print("Bonkers! Nothing to gain >.<")
     return orng or pookie or wmelon or nbetlocal
+
+# Chad 3 of the program - handles the user input and exceptions during the betting.
 
 def bethandling(raw_input: str, balance: int):
     raw = raw_input.lower()
