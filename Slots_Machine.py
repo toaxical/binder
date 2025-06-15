@@ -10,11 +10,11 @@ def spinrow(symbols):
 
     print("-=-=-=-=-=-=-=-=-=-=-\nAnd the boxie spins.....")
     print("-=-=-=-=-=-=-=-=-=-=-")
-    time.sleep(3)
+    time.sleep(0)
     print(f"|{luck1}|❓|❓|")
-    time.sleep(2)
+    time.sleep(0)
     print(f"|{luck1}|{luck2}|❓|")
-    time.sleep(2)
+    time.sleep(0)
     print(f"|{luck1}|{luck2}|{luck3}|")
     print("-=-=-=-=-=-=-=-=-=-=-")
 
@@ -43,24 +43,40 @@ def resultdecider(watashi, nbet):
         print("Bonkers! Nothing to gain >.<")
     return orng or pookie or wmelon or nbetlocal
 
-def bethandling(str_betamt):
-    try:
-        arb_betamt = int(str_betamt) # tries converting the value given by user to integer, also handles any error that might be triggered
-    except ValueError:
-        print("What?")
-    return
+def bethandling(raw_input: str, balance: int):
+    raw = raw_input.lower()
+
+    if raw == "q":
+        return "quit", balance
+    
+    if not raw.isdigit():
+        print("Please enter a valid input!")
+        return None, balance
+
+    bet = int(raw)
+
+    if bet < 10:
+        print("Minimum allowed is $10 cuh..")
+        return None, balance
+    if bet > 1000:
+        print("Maximum allowed is $1000 cuh...")
+        return None, balance
+    if bet > balance:
+        print(f"Insufficient balance! [Current balance: {balance}]")
+        return None, balance
+    
+    return bet, balance - bet
 
 # Global Variables 👑
 
 symbols = ('🎀' , '🍉' , '🍊')
 
 def main():
-    global balance, winning, symbols, carry_on, watashi
+    global balance, winning, symbols, carry_on, watashi, nbet
 
     balance = 0
     winning = 0
     carry_on = True
-    betamt = 0
     nbet = 0
 
 # Welcome Script
@@ -94,49 +110,40 @@ def main():
 
 
 # Main body for gamble paradise 😭
+
     while carry_on:
             str_betamt = (input("----------------------------------\nWhat amount would you like to bet? (min: $10, max: $1000) ['q' to quit]: \n> $"))
+            
+            bet_result, balance = bethandling(str_betamt, balance)
 
-            if str_betamt == "q": # handles the quit wish of user first before converting to input
+            if bet_result == "quit":
                 print("Do come back again! 😘")
                 exit()
-            else:
-                bethandling(str_betamt)
+            if bet_result == None:
+                continue
 
-                #betamt 
+            nbet = bet_result
 
-            if betamt < 10:
-                print("Who tf let you in here boy? 😭") 
-            elif betamt > 1000:
-                print("Sorry rich guy, max amount is $1000 😞")
-            elif  betamt == "q":
-                print("Do come back again! 😘")
-                carry_on = False # ENDS the gamble (tho it'll auto exit if u run outta balance)
-            elif betamt > balance:
-                print(f"Your do not have enough balance! [Current balance: {balance}]") # quits the game if the bet amount input is higher than the current balance (optimised version as earlier it'd quit whenever user tries to bet more and still has balance *industry level*)
-            else:
-                nbet += betamt
-                balance -= betamt
+            
+            watashi = spinrow(symbols) # this will call the function spinrow() and let us capture the value of it in "watashi" variable for later use in resultdecider()
+            wuw = resultdecider(watashi, nbet) # this will call the function resultdecider() and let us capture its value in "wuw" variable for later use in payout, possibly (didnt use).
 
-                watashi = spinrow(symbols) # this will call the function spinrow() and let us capture the value of it in "watashi" variable for later use in resultdecider()
-
-                wuw = resultdecider(watashi, nbet) # this will call the function resultdecider() and let us capture its value in "wuw" variable for later use in payout, possibly (didnt use).
             # if the user does NOT win
-                if wuw == 0:
+            if wuw == 0:
                     nbet *= 0 
             # if the user WINS1
+            else:
+                nbet *= 0
+                winning += wuw
+                winchoice = input("----------------------------------\nDo you wish to obtain a payout of your winning(s)? (y/n) \n> ") # prompts user if they want cashout or not
+                if winchoice == "y":
+                    balance += winning
+                    time.sleep(3)
+                    print(f"Successfully added ${winning} to your balance! [Balance = ${balance}]")
+                    winning *= 0
                 else:
-                    nbet *= 0
-                    winning += wuw
-                    winchoice = input("----------------------------------\nDo you wish to obtain a payout of your winning(s)? (y/n) \n> ") # prompts user if they want cashout or not
-                    if winchoice == "y":
-                        balance += winning
-                        time.sleep(3)
-                        print(f"Successfully added ${winning} to your balance! [Balance = ${balance}]")
-                        winning *= 0
-                    else:
-                        print("Happy day ahead! 😊")
-
+                    print("Happy day ahead! 😊")
+                
 if __name__ == "__main__":
     main()
 
