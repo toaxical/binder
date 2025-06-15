@@ -43,18 +43,12 @@ def resultdecider(watashi, nbet):
         print("Bonkers! Nothing to gain >.<")
     return orng or pookie or wmelon or nbetlocal
 
-# might include in later version (lil bro's function was done in less than 5 lines in main loop 😔)
-#def payout():
-    balance_win = 0
-    dilemma = input("Do you wish to add your winning to betting balance? (y/n): \n> ").lower
-    if dilemma == "y":
-        balance_win += winning
-        print(f"balance_win the local var = {balance_win}")
-        print(f"Successfully added {winning} to your balance!")
-    elif dilemma == "n":
-        print("Have a good day!")
-        pass
-    return balance_win and winning 
+def bethandling(str_betamt):
+    try:
+        arb_betamt = int(str_betamt) # tries converting the value given by user to integer, also handles any error that might be triggered
+    except ValueError:
+        print("What?")
+    return
 
 # Global Variables 👑
 
@@ -66,6 +60,7 @@ def main():
     balance = 0
     winning = 0
     carry_on = True
+    betamt = 0
     nbet = 0
 
 # Welcome Script
@@ -80,25 +75,40 @@ def main():
         wish = input("What would you like to do?: \n1. BETTING \n2. Quit \n> ")
 
         if wish == "1":
-            ini_balance = int(input("----------------------------------\nWhat balance do you possess currently?: \n> $")) # the show begins, will ask user for their initial bal - in case of no winning throughout the game, theres no way to increase this *yet*
-    # these if and else statements provide validation
-
-            if ini_balance <= 10:
-                print("----------------------------------\nSorry you do not have sufficient amount to participate!\n----------------------------------")
+    # try block for swiftly passing code even if error occurs (which is likely to occur)
+            try:
+                ini_balance = int(input("----------------------------------\nWhat balance do you possess currently?: \n> $")) # the show begins, will ask user for their initial bal - in case of no winning throughout the game, theres no way to increase this *yet*
+                if ini_balance <= 10:
+                    print("----------------------------------\nSorry you do not have sufficient amount to participate!\n----------------------------------")
+                    exit()
+            except ValueError:
+                print("  ~  Please enter a valid input!  ~  \n")
             else:
                 balance += ini_balance
                 break
         if wish == "2":
             print("Do come back again! 😘") # show quits too early :(
+        
+        else:
+            print("\n...What? 😭\n----------------------------------")
 
 
 # Main body for gamble paradise 😭
     while carry_on:
-            betamt = int(input("----------------------------------\nWhat amount would you like to bet? (min: $10, max: $100) ['q' to quit]: \n> $"))
+            str_betamt = (input("----------------------------------\nWhat amount would you like to bet? (min: $10, max: $1000) ['q' to quit]: \n> $"))
+
+            if str_betamt == "q": # handles the quit wish of user first before converting to input
+                print("Do come back again! 😘")
+                exit()
+            else:
+                bethandling(str_betamt)
+
+                #betamt 
+
             if betamt < 10:
-               print("Who tf let you in here boy? 😭") 
-            elif betamt > 100:
-                print("Sorry rich guy, max amount is $100 😞")
+                print("Who tf let you in here boy? 😭") 
+            elif betamt > 1000:
+                print("Sorry rich guy, max amount is $1000 😞")
             elif  betamt == "q":
                 print("Do come back again! 😘")
                 carry_on = False # ENDS the gamble (tho it'll auto exit if u run outta balance)
